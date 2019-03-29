@@ -1,0 +1,120 @@
+<div class="row" id="body-row">
+  <div id="sidebar-container" class="sidebar-expanded d-none d-md-block default-color col-2 z-depth-3">
+    <ul class="list-group sticky-top sticky-offset" id="sidebar-list">
+      <li class="default-color-dark text-white list-group-item d-flex borderless">
+        <h5 class="">RR Dental Clinic</h5>
+      </li>
+      <a href="#/admin-profile" aria-expanded="false" class="default-color text-white list-group-item list-group-item-action flex-column borderless mt-3 mb-3 ">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-user fa-fw mr-3"></span>
+          <span class="menu-collapsed">Account</span>
+          <span class="submenu-icon ml-auto"></span>
+        </div>
+      </a>
+      <li class="list-group-item sidebar-separator-title text-white default-color-dark borderless d-flex align-items-center menu-collapsed">
+        <small>Options</small>
+      </li>
+      <a href="#/view" class="default-color text-white list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-list-ol fa-fw mr-3"></span>
+          <span class="menu-collapsed">View Details</span>
+        </div>
+      </a>
+      <a href="#/add-patients" class="blue lighten-5 text-default list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-plus fa-fw mr-3"></span>
+          <span class="menu-collapsed">Add Patients</span>
+        </div>
+      </a>
+    </ul>
+  </div>
+    
+    <div class="col p-4">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h4 class="text-muted mb-4">Add Patients</h4>
+          <div class="card">
+            <div class="card-header default-color text-white">
+              Input Data
+            </div>
+            <div class="card-body">
+              <form id="signup_form" autocomplete="off">
+                <div class="row mt-3">
+                  <div class="form-group col-md-4">
+                    <input class="form-control" type="text" placeholder="Last Name" required ng-model="patients_form.last_name"> 
+                  </div>
+                  <div class="form-group col-md-4">
+                    <input class="form-control" type="text" placeholder="Middle Name" ng-model="patients_form.middle_name"> 
+                  </div>
+                  <div class="form-group col-md-4">
+                    <input class="form-control" type="text" placeholder="First Name" ng-model="patients_form.first_name">
+                  </div>
+                </div>
+                <div class="row my-3">
+                  <div class="form-group col-md-4">
+                    <input class="form-control" type="text" id="date-input" placeholder="Date of Birth" ng-model="patients_form.date_of_birth">  
+                  </div> 
+                  <div class="form-group col-md-4">
+                    <input class="form-control" type="text" placeholder="Contact" ng-model="patients_form.contact">
+                  </div>  
+                  <div class="form-group col-md-2">
+                    <input class="form-control" type="text" placeholder="Age" ng-model="patients_form.age">
+                  </div>
+                </div>
+                <div class="row my-3">
+                  <div class="form-group col-md-4" id="gender">
+                    <select class="form-control" ng-model="patients_form.gender">
+                      <option disabled="disabled" selected="selected" id="gender_select" value>Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div> 
+                </div>
+                <div class="row mt-3">
+                  <div class="form-group col-md-6">
+                    <input class="form-control" type="text" placeholder="Email Address" ng-model="patients_form.email">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <input class="form-control" type="text" placeholder="Address" ng-model="patients_form.address">
+                  </div>
+                </div>
+                <div class="row my-3">
+                  <div class="col-md">
+                    <h6>
+                      <span class="default-color text-white p-1 rounded">In case of Emergency</span>
+                    </h6>
+                    <div class="row my-4">
+                      <div class="form-group col-md-4">
+                        <input class="form-control" type="text" placeholder="Name" ng-model="patients_form.ename">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <input class="form-control" type="text" placeholder="Contact" ng-model="patients_form.econtact">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <input class="form-control" type="text" placeholder="Relation" ng-model="patients_form.eralation">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row justify-content-end">
+                  <button class="btn btn-default btn-md mr-4" ng-click="add_patients()">
+                    Add
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+  $(document).ready(function () {
+    $('#date-input').datepicker({
+      'format':'dd-mm-yyyy',
+      'autoclose': true
+    });
+  });
+  </script>

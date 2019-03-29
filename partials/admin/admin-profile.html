@@ -1,0 +1,73 @@
+<div class="row" id="body-row">
+  <div id="sidebar-container" class="sidebar-expanded d-none d-md-block default-color col-2 z-depth-3">
+    <ul class="list-group sticky-top sticky-offset" id="sidebar-list">
+      <li class="default-color-dark text-white list-group-item d-flex borderless">
+        <h5 class="">RR Dental Clinic</h5>
+      </li>
+      <a href="#/admin-profile" aria-expanded="false" class="blue lighten-5 text-default list-group-item list-group-item-action flex-column borderless mt-3 mb-3 ">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-user fa-fw mr-3"></span>
+          <span class="menu-collapsed">Account</span>
+          <span class="submenu-icon ml-auto"></span>
+        </div>
+      </a>
+      <li class="list-group-item sidebar-separator-title text-white default-color-dark borderless d-flex align-items-center menu-collapsed">
+        <small>Options</small>
+      </li>
+      <a href="#/view" class="default-color text-white list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-list-ol fa-fw mr-3"></span>
+          <span class="menu-collapsed">View Details</span>
+        </div>
+      </a>
+      <a href="#/add-patients" class="default-color text-white list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-plus fa-fw mr-3"></span>
+          <span class="menu-collapsed">Add Patients</span>
+        </div>
+      </a>
+    </ul>
+  </div>
+    
+  <div class="col p-4">
+    <div class="col-md-12">
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <h4 class="text-muted mb-4">Edit Account</h4>
+          <div class="card">
+            <div class="card-header default-color white-text">
+            </div>
+            <div class="card-body">
+              <form id="signup_form" action="">
+                <div class="row my-3">
+                  <div class="form-group col">
+                    <input class="form-control" type="text" placeholder="Enter new username">
+                  </div>
+                </div>
+                <div class="row my-3">
+                  <div class="form-group col">
+                    <input class="form-control" type="password" placeholder="Enter new password">
+                  </div>
+                </div>
+                <div class="row my-3">
+                  <div class="form-group col">
+                    <input class="form-control" type="password" placeholder="Confirm new password">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-success btn-sm">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script>
+  $(document).ready(function () {
+    $('#patients_table').DataTable();
+  });
+  </script>
