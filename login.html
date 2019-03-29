@@ -48,7 +48,7 @@
         },
         success: function (data) {
           // pag may nakita nang cookie dederetso sa viewpage
-          location.replace('#/view');
+          location.replace('index.html/#/view');
         }
       });
     }
@@ -97,6 +97,7 @@
           },
           success: function (data) {
             alert('Welcome');
+            window.location.href="index.html/#/view"
             // window.location.href = 'loginLoader.html';
           }
         });

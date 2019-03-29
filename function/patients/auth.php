@@ -11,16 +11,16 @@ $class = new Patients(
                   $data
                     );
 
-$data = $class->login();
+$datas = $class->login($data);
 
 header('HTTP/1.0 500 Error Saving');
-if ($data['status']) {
+if ($datas['status']) {
     // pag nag success may nakita sa database mag sset cookie tayo.
     $pk = 'pk'; 
-    setcookie($pk, $data['result'][0]['id'], time()+7200000, '/');
+    setcookie($pk, $datas['result'][0]['id'], time()+7200000, '/');
     
     header('HTTP/1.0 200 OK');
 }
 
 header('Content-Type: application/json');
-echo json_encode($data);
+echo json_encode($datas);
