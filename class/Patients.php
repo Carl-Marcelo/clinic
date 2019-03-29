@@ -1,6 +1,6 @@
 <?php
 
-require_once '../connect.php';
+// require_once '../connect.php';
 require_once 'ClassParent.php';
 
 class Patients extends ClassParent
@@ -20,6 +20,7 @@ class Patients extends ClassParent
     public $econtact = null;
     public $erelation = null;
     public $remarks = null;
+    // public $password = null;
 
     public function __construct(
                                 $pk,
@@ -37,6 +38,7 @@ class Patients extends ClassParent
                                 $econtact,
                                 $erelation,
                                 $remarks
+                                // $password
                             ) {
         $fields = get_defined_vars();
 
@@ -88,6 +90,7 @@ class Patients extends ClassParent
             '$this->remarks'
         );
 EOT;
+        // password , '$this->password'
 
         return ClassParent::insert($sql);
     }
@@ -113,7 +116,7 @@ EOT;
             remarks
         FROM patients;
 EOT;
-
+        // password
         return ClassParent::get($sql);
     }
 
@@ -148,7 +151,7 @@ EOT;
             ename,
             econtact,
             erelation,
-            remarks
+            remarks,
             )
         =
             (
@@ -169,7 +172,7 @@ EOT;
             )
         WHERE pk = $this->pk;
 EOT;
-
+        // password ,'$this->password'
         return ClassParent::update($sql);
     }
 
@@ -195,16 +198,16 @@ EOT;
         FROM patients;
 EOT;
 
+        // password
         return ClassParent::get($sql);
     }
 
-    public function login($data){
-        foreach($data as $k=>$v){
-            $this->$k = pg_escape_string(strip_tags(trim($v)));
-        }
-        $sql = <<<EOT
-            select * from admin where username = '$this->email' AND password = '$this->password'
-EOT;
-        return ClassParent::get($sql);
-    }
+//     public function login()
+//     {
+//         $sql = <<<EOT
+//             select * from admin where username = '$this->email' AND password = '$this->password'
+// EOT;
+
+//         return ClassParent::get($sql);
+//     }
 }
