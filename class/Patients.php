@@ -197,4 +197,14 @@ EOT;
 
         return ClassParent::get($sql);
     }
+
+    public function login($data){
+        foreach($data as $k=>$v){
+            $this->$k = pg_escape_string(strip_tags(trim($v)));
+        }
+        $sql = <<<EOT
+            select * from admin where username = '$this->email' AND password = '$this->password'
+EOT;
+        return ClassParent::get($sql);
+    }
 }

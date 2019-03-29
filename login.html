@@ -5,14 +5,17 @@
         <form method="POST" action="" id="login_form">
           <div class="form-group mt-5 pt-5"> 
             <label for="admin_username">Username</label>
-            <input class="form-control" type="text" id="admin_username" required ng-model="login_form.username" autocomplete="off">
+            <input class="form-control" type="text" id="email" required ng-model="login_form.username" autocomplete="off">
           </div>
           <div class="form-group">
             <label for="admin_password">Password</label>
-            <input class="form-control" type="password" id="admin_password" required ng-model="login_form.password">
+            <input class="form-control" type="password" id="pass" required ng-model="login_form.password">
           </div>
           <div class="form-group">
-            <a class="btn btn-primary col-sm-7 col-md-6 col-lg-5 col-lg mx-auto" id="login_submit" href="#/view">Login</a>
+              <div id="div-message" class="text-danger" align="center"></div>
+
+            <!-- tinangal ko yung href="#/view" dahil dapat mag success muna yung pag select sa db bago redirect sa view -->
+            <a class="btn btn-primary col-sm-7 col-md-6 col-lg-5 col-lg mx-auto" id="login_submit" onclick="login()" >Login</a>
           </div>
         </form>
       </div>
@@ -23,6 +26,35 @@
 <script>
   // Button Mouseover and Mouseout  
   $(document).ready(function () {
+    //para basahin agad yung taga check ng cookie
+    checksession();
+
+    //dito naman pwede yung "PRESS ENTER" para d na click yung login button
+    $("#email, #pass, #login").on('keypress', function (event) {
+        if (event.which == 13) {
+          login();
+        }
+      });
+    // dito taga check kung may cookie naka set pag meron reredirect nya doon sa view page kahit ilang
+    // reload mo dito d na bubukas to lagi dederetso to sa view page hangat d ka nag lologout
+  
+    function checksession() {
+      $.ajax('function/patients/session.php', {
+        type: "POST",
+        statusCode: {
+          404: function (response) {
+            //do nothing
+          }
+        },
+        success: function (data) {
+          // pag may nakita nang cookie dederetso sa viewpage
+          location.replace('#/view');
+        }
+      });
+    }
+
+
+
     $('#login_submit').mouseover(function () {  
       $('#login_submit').css({
         "border-radius"       : "30px",
@@ -36,4 +68,39 @@
       });
     });
   });
+
+
+  function login() {
+      var error = 0;
+      var empid = $('#email').val();
+      var pass = $('#pass').val();
+
+      if (empid.replace(/\s/g, '') == "" || pass.replace(/\s/g, '') == "") {
+        $('#div-message').empty().show().append("Incorrect Email and/or Password");
+
+        setTimeout(function () {
+          $('#div-message').empty().hide();
+        }, 5000);
+      }
+      else {
+        $.ajax('function/patients/auth.php', {
+          type: "POST",
+          data: { email: empid, password: pass },
+          statusCode: {
+            404: function (response) {
+              $('#div-message').empty().show().append("Incorrect Employee ID and/or Password");
+
+              setTimeout(function () {
+                $('#div-message').empty().hide();
+              }, 5000);
+            }
+          },
+          success: function (data) {
+            alert('Welcome');
+            // window.location.href = 'loginLoader.html';
+          }
+        });
+      }
+
+    }
 </script>
