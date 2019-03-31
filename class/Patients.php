@@ -20,7 +20,6 @@ class Patients extends ClassParent
     public $econtact = null;
     public $erelation = null;
     public $remarks = null;
-    // public $password = null;
 
     public function __construct(
                                 $pk,
@@ -38,7 +37,6 @@ class Patients extends ClassParent
                                 $econtact,
                                 $erelation,
                                 $remarks
-                                // $password
                             ) {
         $fields = get_defined_vars();
 
@@ -90,7 +88,6 @@ class Patients extends ClassParent
             '$this->remarks'
         );
 EOT;
-        // password , '$this->password'
 
         return ClassParent::insert($sql);
     }
@@ -116,7 +113,7 @@ EOT;
             remarks
         FROM patients;
 EOT;
-        // password
+
         return ClassParent::get($sql);
     }
 
@@ -172,8 +169,6 @@ EOT;
             )
         WHERE pk = $this->pk;
 EOT;
-        // password ,'$this->password'
-        return ClassParent::update($sql);
     }
 
     public function get_patients()
@@ -198,16 +193,6 @@ EOT;
         FROM patients;
 EOT;
 
-        // password
         return ClassParent::get($sql);
     }
-
-//     public function login()
-//     {
-//         $sql = <<<EOT
-//             select * from admin where username = '$this->email' AND password = '$this->password'
-// EOT;
-
-//         return ClassParent::get($sql);
-//     }
 }

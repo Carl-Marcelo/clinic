@@ -10,15 +10,15 @@
         <form method="POST" action="" id="login_form">
           <div class="form-group mt-5 pt-5"> 
             <label for="admin_username">Username</label>
-            <input class="form-control" type="text" id="email" required ng-model="login_form.username" autocomplete="off">
+            <input class="form-control" type="text" id="admin_username" required ng-model="login_form.username" autocomplete="off">
           </div>
           <div class="form-group">
             <label for="admin_password">Password</label>
-            <input class="form-control" type="password" id="pass" required ng-model="login_form.password">
+            <input class="form-control" type="password" id="admin_password" required ng-model="login_form.password">
           </div>
           <div class="form-group">
               <!-- <div id="div-message" class="text-danger" align="center"></div> -->
-            <a class="btn btn-primary col-sm-7 col-md-6 col-lg-5 col-lg mx-auto" id="login_submit" href='#/view' onclick="login()" >Login</a>
+            <a class="btn btn-primary col-sm-7 col-md-6 col-lg-5 col-lg mx-auto" id="login_submit" onclick="login()" >Login</a>
           </div>
         </form>
       </div>
@@ -48,11 +48,11 @@
     // checksession();
 
     //  Enable "ENTER" keypress
-    // $("#email, #pass, #login").on('keypress', function (event) {
-    //     if (event.which == 13) {
-    //       login();
-    //     }
-    //   });
+    $("#admin_username, #admin_password, #login_submit").on('keypress', function (event) {
+        if (event.which == 13) {
+          login();
+        }
+      });
 
     //  Check cookie, if cookie is set then redirect to view page.
     // function checksession() {
@@ -61,47 +61,48 @@
     //     statusCode: {
     //       404: function (response) {
     //         location.replace('http://localhost/clinic/#/view');
-
     //       }
     //     },
     //     success: function (data) {
-    //       If there is already set cookie, it will auto direct to view page
+    //       // If there is already set cookie, it will auto direct to view page
     //       location.replace('http://localhost/clinic/#/view');
     //     }
     //   });
     // }
 
-
-    // function login() {
-    //   var error = 0;
-    //   var empid = $('#email').val();
-    //   var pass = $('#pass').val();
-
-    //   if (empid.replace(/\s/g, '') == "" || pass.replace(/\s/g, '') == "") {
-    //     $('#div-message').empty().show().append("Incorrect Email and/or Password");
-
-    //     setTimeout(function () {
-    //       $('#div-message').empty().hide();
-    //     }, 5000);
-    //   }
-    //   else {
-    //     $.ajax('function/patients/auth.php', {
-    //       type: "POST",
-    //       data: { email: empid, password: pass },
-    //       statusCode: {
-    //         404: function (response) {
-    //           $('#div-message').empty().show().append("Incorrect Employee ID and/or Password");
-                
-    //           setTimeout(function () {
-    //             $('#div-message').empty().hide();
-    //           }, 5000);
-    //         }
-    //       },
-    //       success: function (data) {
-    //         alert('Welcome');
-    //         location.replace('http://localhost/clinic/#/view');
-    //       }
-    //     });
-    //   }
-    // }
+    function login() {
+      var error = 0;
+      var userId = $('#admin_username').val();
+      var pass = $('#admin_password').val();
+      
+      if ( userId.replace(/\s/g, '') == "" || pass.replace(/\s/g, '') == "" ) {
+        swal(
+          "Invalid",
+          "Fill up username and password",
+          "error"
+        )
+      } else {
+        $.ajax('function/admin/login.php', {
+          type        :   "POST",
+          data        :   { username : userId, password : pass },
+          statusCode  :   {
+            404 : function (response) {
+              swal (
+                "",
+                "",
+                "error"
+              )
+            }
+          },
+          success : function (data) {
+            swal(
+              "Success",
+              "Login Successful",
+              "success"
+            )
+            location.replace('http://localhost/clinic/#view');
+          }
+        });
+      }
+    }
 </script>
