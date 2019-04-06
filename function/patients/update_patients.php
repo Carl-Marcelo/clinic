@@ -17,7 +17,8 @@ $class = new Patients(
                         $_POST['address'],
                         $_POST['ename'],
                         $_POST['econtact'],
-                        $_POST['erelation']
+                        $_POST['erelation'],
+                        $_POST['remarks']
                     );
 
 $data = $class->update_patients();

@@ -23,15 +23,16 @@ CREATE TABLE patients (
   address varchar(255) NOT NULL,
   ename varchar(255) NOT NULL,
   econtact varchar(255) NOT NULL,
-  erelation varchar(255) NOT NULL
+  erelation varchar(255) NOT NULL,
+  remarks varchar(255) NOT NULL
 );  
 
-CREATE TABLE remarks (
-  id serial primary key,
-  pk integer REFERENCES patients(pk),
-  remarks_name varchar(255) NOT NULL,
-  remarks_date timestamp NOT NULL
-);
+-- CREATE TABLE remarks (
+--   id serial primary key,
+--   pk integer REFERENCES patients(pk),
+--   remarks_name varchar(255) NOT NULL,
+--   remarks_date timestamp NOT NULL
+-- );
 
 INSERT INTO admin (name, username, password) 
 VALUES ('Rolando Romero', 'admin', 'adminpassword123');

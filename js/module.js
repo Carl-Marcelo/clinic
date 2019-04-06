@@ -17,6 +17,10 @@ clinicApp.config(function ($routeProvider) {
     title       : 'Logout',
     templateUrl : 'login.html'
   })
+  .when('/home', {
+    title       : 'Home',
+    templateUrl : 'partials/admin/home.html'
+  })
   .when('/admin-profile', {
     title       : 'Account',
     controller  : 'loginController',

@@ -13,48 +13,48 @@ clinicApp.controller('adminController', function ( $scope, ClinicFactory ) {
   $scope.update_data = {};
   $scope.delete_data = {};
 
-  $scope.remarks_form = {};
-  $scope.remarks = [];
+  // $scope.remarks_form = {};
+  // $scope.remarks = [];
 
   patients();
-  remarks();
+  // remarks();
 
-  $scope.add_remarks = function () {
-    var promise = ClinicFactory.add_remarks($scope.remarks_form);
+  // $scope.add_remarks = function () {
+  //   var promise = ClinicFactory.add_remarks($scope.remarks_form);
 
-    promise.then( function (data) {
-      swal(
-        "Data Saved",
-        "Successfully Stored",
-        "success"
-      );
-      $('#remarks-modal').modal('hide');
-    })
-    .then(null, function () {  
-      swal(
-        "Failed to save",
-        "Try Again",
-        "error"        
-      );
-    });
-  };
+  //   promise.then( function (data) {
+  //     swal(
+  //       "Data Saved",
+  //       "Successfully Stored",
+  //       "success"
+  //     );
+  //     $('#remarks-modal').modal('hide');
+  //   })
+  //   .then(null, function () {  
+  //     swal(
+  //       "Failed to save",
+  //       "Try Again",
+  //       "error"        
+  //     );
+  //   });
+  // };
 
-  $scope.data_remarks = function (key) {
-    $scope.remarks_form = $scope.patients[key];
-    console.log($scope.remarks_form);
-    remarks();
-  };
+  // $scope.data_remarks = function (key) {
+  //   $scope.remarks_form = $scope.patients[key];
+  //   console.log($scope.remarks_form);
+  //   remarks();
+  // };
 
-  function remarks() {
-    var promise = ClinicFactory.fetch_remarks();
+  // function remarks() {
+  //   var promise = ClinicFactory.fetch_remarks();
 
-    promise.then( function (data) {
-      $scope.remarks = data.data.result;
-    })
-    .then(null, function(data) {
+  //   promise.then( function (data) {
+  //     $scope.remarks = data.data.result;
+  //   })
+  //   .then(null, function(data) {
       
-    });
-  };
+  //   });
+  // };
 
   $scope.add_patients = function () {
     var promise = ClinicFactory.add_patients($scope.patients_form);

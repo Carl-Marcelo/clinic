@@ -19,6 +19,7 @@ class Patients extends ClassParent
     public $ename = null;
     public $econtact = null;
     public $erelation = null;
+    public $remarks = null;
 
     public function __construct(
                                 $pk,
@@ -34,7 +35,8 @@ class Patients extends ClassParent
                                 $address,
                                 $ename,
                                 $econtact,
-                                $erelation
+                                $erelation,
+                                $remarks
                             ) {
         $fields = get_defined_vars();
         if (empty($fields)) {
@@ -65,7 +67,8 @@ class Patients extends ClassParent
             address,
             ename,
             econtact,
-            erelation
+            erelation,
+            remarks
         ) VALUES (
             '$date',
             '$this->last_name',
@@ -79,7 +82,8 @@ class Patients extends ClassParent
             '$this->address',
             '$this->ename',
             '$this->econtact',
-            '$this->erelation'
+            '$this->erelation',
+            '$this->remarks'
         );
 EOT;
 
@@ -90,7 +94,7 @@ EOT;
     {
         $sql = <<<EOT
         SELECT
-            patients.pk,
+            pk,
             date_time,
             last_name,
             middle_name,
@@ -103,10 +107,9 @@ EOT;
             address,
             ename,
             econtact,
-            erelation
-        FROM patients
-        FULL JOIN remarks ON remarks.pk = patients.pk
-        WHERE patients.pk = 1;
+            erelation,
+            remarks
+        FROM patients;
 EOT;
 
         return ClassParent::get($sql);
@@ -141,7 +144,8 @@ EOT;
             address,
             ename,
             econtact,
-            erelation
+            erelation,
+            remarks
             )
         =
             (
@@ -157,7 +161,8 @@ EOT;
             '$this->address',
             '$this->ename',
             '$this->econtact',
-            '$this->erelation'
+            '$this->erelation',
+            '$this->remarks'
             )
         WHERE pk = $this->pk;
 EOT;
@@ -169,7 +174,7 @@ EOT;
     {
         $sql = <<<EOT
         SELECT
-            patients.pk,
+            pk,
             date_time,
             last_name,
             middle_name,
@@ -182,10 +187,9 @@ EOT;
             address,
             ename,
             econtact,
-            erelation
-        FROM patients
-        INNER JOIN remarks ON remarks.pk = patients.pk
-        WHERE patients.pk = 1;      
+            erelation,
+            remarks      
+        FROM patients;
 EOT;
 
         return ClassParent::get($sql);

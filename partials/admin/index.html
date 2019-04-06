@@ -14,6 +14,12 @@
       <li class="list-group-item sidebar-separator-title text-white default-color-dark borderless d-flex align-items-center menu-collapsed">
         <small>Options</small>
       </li>
+      <!-- <a href="#/home" class="default-color text-white list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-home fa-fw mr-3"></span>
+          <span class="menu-collapsed">Home</span>
+        </div>
+      </a> -->
       <a href="#/view" class="blue lighten-5 text-default list-group-item list-group-item-action borderless">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-list-ol fa-fw mr-3"></span>
@@ -72,9 +78,9 @@
                       <a class="text-success px-1" data-toggle="modal" data-target="#update-modal" ng-click="data_update(key)">
                         <i class="fa fa-edit"></i>
                       </a>
-                      <a class="text-default px-1" data-toggle="modal" data-target="#remarks-modal" ng-click="data_remarks(key)">
-                          <i class="fa fa-plus"></i>
-                        </a>
+                      <!-- <a class="text-default px-1" data-toggle="modal" data-target="#remarks-modal" ng-click="data_remarks(key)">
+                        <i class="fa fa-plus"></i>
+                      </a> -->
                       <a class="text-danger px-1" data-toggle="modal" data-target="#delete-modal" ng-click="data_delete(key)">
                         <i class="fa fa-trash"></i>
                       </a>
@@ -177,10 +183,10 @@
                     <tbody>
                       <tr>
                         <td>
-                            {{ remarks_form.remarks_date }}
+                            {{ view_data.date_time }}
                         </td>
                         <td>
-                            {{ remarks_form.remarks_name }}
+                            {{ view_data.remarks }}
                         </td>
                       </tr>
                     </tbody>
@@ -299,6 +305,14 @@
                 </div>
               </div>
             </div>
+            <div class="col-md-6 float-right">
+              <div class="default-color text-white rounded pl-1">
+                <h6>Remarks</h6>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" rows="3" id="remarks_text" ng-model="update_data.remarks"></textarea>
+              </div>
+            </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -310,7 +324,7 @@
   </div>
 
   <!-- Remarks Modal -->
-  <div class="modal fade" id="remarks-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="remarks-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-header default-color text-white">
@@ -334,7 +348,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <script>
 
