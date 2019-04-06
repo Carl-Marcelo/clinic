@@ -60,11 +60,13 @@ html, body {
   transition: all .6s ease;
 }
 
-#login_form input:focus, #signup_form input:focus, #signup_form select:focus, #signup_form #remarks textarea:focus {
+#login_form input:focus, 
+#signup_form input:focus, 
+#signup_form select:focus, 
+#remarks_text:focus {
   outline: none !important;
   border: none;
-  box-shadow: 0 3px 9px rgba(49, 49, 49, 0.397),
-  3px 4px 8px rgba(94,114,228,.1);
+  box-shadow: 0 5px 9px rgba(49, 49, 49, 0.335);
   transition: all .6s ease;
 }
 
@@ -145,9 +147,21 @@ table.dataTable thead .sorting_desc_disabled:before {
   bottom: .5em;
 }
 
+#searchBox {
+  border: none;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
+}
 
+#searchBox:focus {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+}
 
-
+#search i {
+  border-radius: 3px;
+  height: 30px;
+  width: 30px;
+  padding: 6px;
+}
 
 /* Return to top button */
 #return-to-top-btn {

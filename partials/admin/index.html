@@ -4,20 +4,20 @@
       <li class="default-color-dark text-white list-group-item d-flex borderless">
         <h5 class="">RR Dental Clinic</h5>
       </li>
-      <a href="#/admin-profile" aria-expanded="false" class="default-color text-white list-group-item list-group-item-action flex-column borderless mt-3 mb-3 ">
+      <!-- <a href="#/admin-profile" aria-expanded="false" class="default-color text-white list-group-item list-group-item-action flex-column borderless mt-3 mb-3 ">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-user fa-fw mr-3"></span>
           <span clas="menu-collapsed">Account</span>
           <span class="submenu-icon ml-auto"></span>
         </div>
-      </a>
+      </a> -->
       <li class="list-group-item sidebar-separator-title text-white default-color-dark borderless d-flex align-items-center menu-collapsed">
         <small>Options</small>
       </li>
       <a href="#/view" class="blue lighten-5 text-default list-group-item list-group-item-action borderless">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-list-ol fa-fw mr-3"></span>
-          <span class="menu-collapsed">View Details</span>
+          <span class="menu-collapsed">View Patients</span>
         </div>
       </a>
       <a href="#/add-patients" class="default-color text-white list-group-item list-group-item-action borderless">
@@ -26,7 +26,7 @@
           <span class="menu-collapsed">Add Patients</span>
         </div>
       </a>
-      <a onclick="" class="default-color text-white list-group-item list-group-item-action borderless">
+      <a ng-click="logout()" class="default-color text-white list-group-item list-group-item-action borderless">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-sign-out-alt fa-fw mr-3"></span>
           <span class="menu-collapsed">Log Out</span>
@@ -40,7 +40,11 @@
         <h4 class="text-muted mb-4">List of Patients Details</h4>
         <div class="card">
           <div class="card-body">
-            <table class="table table-striped table-hover table-sm" id="patients_table">
+            <form class="form-inline col-md-4" id="search">
+              <i class="fas fa-search default-color text-white"></i>
+              <input class="form-control form-control-sm ml-3 w-75" type="text" id="searchBox" ng-model="searchBox" placeholder="Search" aria-label="Search">
+            </form>
+            <table class="table table-striped table-hover table-sm mt-3" id="patients_table">
               <thead class="default-color white-text">
                 <th scope="col">Date & Time</th>
                 <th scope="col">Name</th>
@@ -52,7 +56,7 @@
                 <th scope="col">Action</th>
               </thead>
               <tbody>
-                <tr ng-repeat="(key, value) in patients">
+                <tr ng-repeat="(key, value) in patients | filter: searchBox">
                   <td>{{ value.date_time }}</td>
                   <td>{{ value.first_name }} {{ value.last_name }} </td>
                   <td>{{ value.age }}</td>
@@ -68,6 +72,9 @@
                       <a class="text-success px-1" data-toggle="modal" data-target="#update-modal" ng-click="data_update(key)">
                         <i class="fa fa-edit"></i>
                       </a>
+                      <a class="text-default px-1" data-toggle="modal" data-target="#remarks-modal" ng-click="data_remarks(key)">
+                          <i class="fa fa-plus"></i>
+                        </a>
                       <a class="text-danger px-1" data-toggle="modal" data-target="#delete-modal" ng-click="data_delete(key)">
                         <i class="fa fa-trash"></i>
                       </a>
@@ -82,6 +89,7 @@
     </div>
   </div>
 
+  <!-- View Modal -->
   <div class="modal fade" id="view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -100,7 +108,7 @@
                     Name
                   </span>
                 </h6>
-                {{ view_data.first_name }} {{ view_data.middle_name }} {{ view_data.last_name }}
+                <span style="border-right: 3px solid lightblue; margin-right: 10px"></span>{{ view_data.first_name }} {{ view_data.middle_name }} {{ view_data.last_name }}
                 <h6 class="my-4">
                   <span class="default-color text-white rounded p-1">
                     Age
@@ -160,17 +168,36 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <div class="card">
+                <h6>Remarks / History</h6>
+                  <table class="table table-sm">
+                    <thead class="default-color text-white">
+                      <th>Date</th>
+                      <th>Remarks</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                            {{ remarks_form.remarks_date }}
+                        </td>
+                        <td>
+                            {{ remarks_form.remarks_name }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                <!-- <div class="card">
                   <div class="card-header default-color text-white">
                     Remarks / History
                   </div>
                   <div class="card-body">
-                    <label class="text-primary" for="">Date</label>
-                    {{ view_data.date_time }} <br> <br>
-                    <label class="text-primary" for=""></label>
-                    {{ view_data.remarks }}
-                  </div>
-                </div>
+                    
+                  </div> -->
+                  <!-- <div class="card-body">
+                      <label class="text-primary" for="">Date</label>
+                      {{ remarks_form.remarks_date }} <br> <br>
+                      <label class="text-primary" for=""></label>
+                      {{ remarks_form.remarks_name }}
+                    </div> -->
               </div>
             </div>
           </div>
@@ -182,6 +209,7 @@
     </div>
   </div>
 
+  <!-- Delete Modal -->
   <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
@@ -202,6 +230,7 @@
     </div>
   </div>
 
+  <!-- Update Modal -->
   <div class="modal fade" id="update-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -271,21 +300,37 @@
               </div>
             </div>
           </form>
-          <div class="row my-3">
-              <div class="col-md-6"></div>
-              <div class="col-md-6">
-                <h6 class="default-color text-white rounded p-1">
-                  Remarks
-                </h6>
-                <div class="form-group">
-                  <textarea class="form-control" rows="3" ng-model="update_data.remarks"></textarea>
-                </div>
-              </div>
-            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success btn-sm" ng-click="update_patients(value)">Update</button>
           <button type="button" class="btn btn-primary btn-sm" ng-click="update_cancel()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Remarks Modal -->
+  <div class="modal fade" id="remarks-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header default-color text-white">
+          <h5 class="modal-title w-100" id="myModalLabel">Add Remarks</h5> 
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row my-3">
+           <div class="col-md-12">
+              <div class="form-group">
+                <textarea class="form-control" rows="3" id="remarks_text" ng-model="remarks_form.remarks_name"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" ng-click="add_remarks(value)">Save</button>
+          <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

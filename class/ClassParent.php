@@ -26,7 +26,6 @@ class ClassParent
             $return['msg'] = pg_last_error();
             $return['result'] = null;
         }
-
         pg_free_result($query);
 
         return $return;
@@ -50,7 +49,6 @@ class ClassParent
             $return['msg'] = pg_last_error();
             $return['result'] = null;
         }
-
         pg_free_result($query);
 
         return $return;
@@ -68,7 +66,6 @@ class ClassParent
             while ($row = pg_fetch_assoc($query)) {
                 $pattern = '/_/';
                 $replacement = ' ';
-
                 if ($row['name'] == 'datecreated') {
                     $row['name'] = 'date created';
                 } elseif ($row['name'] == 'createdby') {
@@ -76,11 +73,9 @@ class ClassParent
                 } elseif ($row['name'] == 'pk') {
                     $row['name'] = 'ID';
                 }
-
                 $row['field'] = $row['name'];
                 $row['answer'] = null;
                 $row['name'] = ucwords(preg_replace($pattern, $replacement, $row['name']));
-
                 $return['result'][] = $row;
             }
         } else {
@@ -89,7 +84,6 @@ class ClassParent
             $return['msg'] = pg_last_error();
             $return['result'] = null;
         }
-
         pg_free_result($query);
 
         return $return;
@@ -99,7 +93,6 @@ class ClassParent
     {
         $query = pg_query($sql);
         $return = array();
-
         if ($query) {
             $return['status'] = true;
             $return['sql'] = $sql;
@@ -109,7 +102,6 @@ class ClassParent
             $return['sql'] = $sql;
             $return['msg'] = pg_last_error();
         }
-
         pg_free_result($query);
 
         return $return;
@@ -119,7 +111,6 @@ class ClassParent
     {
         $query = pg_query($sql);
         $return = array();
-
         if ($query) {
             $return['status'] = true;
             $return['sql'] = $sql;
@@ -130,7 +121,6 @@ class ClassParent
             $return['sql'] = $sql;
             $return['msg'] = pg_last_error();
         }
-
         pg_free_result($query);
 
         return $return;

@@ -1,6 +1,6 @@
 <?php
 
-// require_once '../connect.php';
+require_once '../connect.php';
 require_once 'ClassParent.php';
 
 class Patients extends ClassParent
@@ -19,7 +19,6 @@ class Patients extends ClassParent
     public $ename = null;
     public $econtact = null;
     public $erelation = null;
-    public $remarks = null;
 
     public function __construct(
                                 $pk,
@@ -35,15 +34,12 @@ class Patients extends ClassParent
                                 $address,
                                 $ename,
                                 $econtact,
-                                $erelation,
-                                $remarks
+                                $erelation
                             ) {
         $fields = get_defined_vars();
-
         if (empty($fields)) {
             return false;
         }
-
         foreach ($fields as $k => $v) {
             $this->$k = pg_escape_string(trim(strip_tags($v)));
         }
@@ -69,8 +65,7 @@ class Patients extends ClassParent
             address,
             ename,
             econtact,
-            erelation,
-            remarks
+            erelation
         ) VALUES (
             '$date',
             '$this->last_name',
@@ -84,8 +79,7 @@ class Patients extends ClassParent
             '$this->address',
             '$this->ename',
             '$this->econtact',
-            '$this->erelation',
-            '$this->remarks'
+            '$this->erelation'
         );
 EOT;
 
@@ -96,7 +90,7 @@ EOT;
     {
         $sql = <<<EOT
         SELECT
-            pk,
+            patients.pk,
             date_time,
             last_name,
             middle_name,
@@ -109,9 +103,10 @@ EOT;
             address,
             ename,
             econtact,
-            erelation,
-            remarks
-        FROM patients;
+            erelation
+        FROM patients
+        FULL JOIN remarks ON remarks.pk = patients.pk
+        WHERE patients.pk = 1;
 EOT;
 
         return ClassParent::get($sql);
@@ -122,7 +117,6 @@ EOT;
         $sql = <<<EOT
         DELETE FROM patients
         WHERE pk = $this->pk;
-
 EOT;
 
         return ClassParent::insert($sql);
@@ -147,8 +141,7 @@ EOT;
             address,
             ename,
             econtact,
-            erelation,
-            remarks,
+            erelation
             )
         =
             (
@@ -164,18 +157,19 @@ EOT;
             '$this->address',
             '$this->ename',
             '$this->econtact',
-            '$this->erelation',
-            '$this->remarks'
+            '$this->erelation'
             )
         WHERE pk = $this->pk;
 EOT;
+
+        return ClassParent::update($sql);
     }
 
     public function get_patients()
     {
         $sql = <<<EOT
         SELECT
-            pk,
+            patients.pk,
             date_time,
             last_name,
             middle_name,
@@ -188,9 +182,10 @@ EOT;
             address,
             ename,
             econtact,
-            erelation,
-            remarks
-        FROM patients;
+            erelation
+        FROM patients
+        INNER JOIN remarks ON remarks.pk = patients.pk
+        WHERE patients.pk = 1;      
 EOT;
 
         return ClassParent::get($sql);

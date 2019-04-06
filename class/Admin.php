@@ -1,5 +1,6 @@
 <?php
 
+require_once '../connect.php';
 require_once 'ClassParent.php';
 
 class Admin extends ClassParent
@@ -28,6 +29,10 @@ class Admin extends ClassParent
 
     public function login()
     {
+        // $pass = $this->password;
+
+        // $password = hash('sha256', $pass);
+
         $sql = <<<EOT
         SELECT *
         FROM admin
@@ -40,4 +45,23 @@ EOT;
 
         return ClassParent::get($sql);
     }
+
+//     public function edit_admin()
+//     {
+//         $pass = $data['password'];
+
+//         $sql = <<<EOT
+//         UPDATE
+//             admin
+//         SET
+//             username = lower('$this->username')
+//         AND
+//             password = crypt('$this->password', password)
+//         WHERE
+//             pk = $this->pk;
+
+// EOT;
+
+//         return ClassParent::insert($sql);
+//     }
 }

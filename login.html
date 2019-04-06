@@ -45,7 +45,7 @@
 
 
     //  Check Cookie
-    // checksession();
+    checksession();
 
     //  Enable "ENTER" keypress
     $("#admin_username, #admin_password, #login_submit").on('keypress', function (event) {
@@ -55,20 +55,20 @@
       });
 
     //  Check cookie, if cookie is set then redirect to view page.
-    // function checksession() {
-    //   $.ajax('function/patients/session.php', {
-    //     type: "POST",
-    //     statusCode: {
-    //       404: function (response) {
-    //         location.replace('http://localhost/clinic/#/view');
-    //       }
-    //     },
-    //     success: function (data) {
-    //       // If there is already set cookie, it will auto direct to view page
-    //       location.replace('http://localhost/clinic/#/view');
-    //     }
-    //   });
-    // }
+    function checksession() {
+      $.ajax('function/admin/session.php', {
+        type: "POST",
+        statusCode: {
+          404: function (response) {
+           // do nothing
+          }
+        },
+        success: function (data) {
+          // If there is already set cookie, it will auto direct to view page
+          location.replace('http://localhost/clinic/#/view');
+        }
+      });
+    }
 
     function login() {
       var error = 0;
@@ -77,7 +77,7 @@
       
       if ( userId.replace(/\s/g, '') == "" || pass.replace(/\s/g, '') == "" ) {
         swal(
-          "Invalid",
+          "Empyt Field",
           "Fill up username and password",
           "error"
         )
@@ -87,9 +87,9 @@
           data        :   { username : userId, password : pass },
           statusCode  :   {
             404 : function (response) {
-              swal (
-                "",
-                "",
+              swal(
+                "Invalid Input",
+                "Username or Password not match",
                 "error"
               )
             }
@@ -98,9 +98,9 @@
             swal(
               "Success",
               "Login Successful",
-              "success"
+              "success",
             )
-            location.replace('http://localhost/clinic/#view');
+            location.replace('http://localhost/clinic/#/view');
           }
         });
       }

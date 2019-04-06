@@ -17,8 +17,7 @@ $class = new Patients(
                         $_POST['address'],
                         $_POST['ename'],
                         $_POST['econtact'],
-                        $_POST['erelation'],
-                        $_POST['remarks']
+                        $_POST['erelation']
                     );
 
 $data = $class->delete_patients();

@@ -11,12 +11,12 @@ $class = new Admin(
 
 $data = $class->login();
 
-header('HTTP/1.0 500 Error Login');
+header('HTTP/1.0 404 Error Login');
 if ($data['status']) {
     header('HTTP/1.0 200 OK');
-    // If success data from database set coockie.
+    // If success data from database set cookie.
     $pk = 'pk';
-    setcookie($pk, $data['result'][0]['id'], time() + 7200000, '/');
+    setcookie($pk, $data['result'][0]['pk'], time() + 7200000, '/');
 
     header('HTTP/1.0 200 OK');
 }

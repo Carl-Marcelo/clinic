@@ -1,6 +1,6 @@
 <?php
 
-// dito mag ccheck kung meron bang cookie na nakaset
+
 $pk = 'pk';
 
 if (isset($_COOKIE[$pk]) && !empty($_COOKIE[$pk])) {
@@ -8,7 +8,7 @@ if (isset($_COOKIE[$pk]) && !empty($_COOKIE[$pk])) {
     header('HTTP/1.0 200 OK');
 
     header('Content-Type: application/json');
-    echo 
+    echo
             json_encode(
                         array(
                                 $pk => $_COOKIE[$pk],

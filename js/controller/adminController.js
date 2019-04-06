@@ -1,5 +1,11 @@
 clinicApp.controller('adminController', function ( $scope, ClinicFactory ) {
 
+  // $scope.admin_form = [];
+  // $scope.edit_admin = {};
+
+
+  // $scope.filter = {};
+
   $scope.patients_form = {};  
   $scope.patients = [];
 
@@ -7,7 +13,48 @@ clinicApp.controller('adminController', function ( $scope, ClinicFactory ) {
   $scope.update_data = {};
   $scope.delete_data = {};
 
+  $scope.remarks_form = {};
+  $scope.remarks = [];
+
   patients();
+  remarks();
+
+  $scope.add_remarks = function () {
+    var promise = ClinicFactory.add_remarks($scope.remarks_form);
+
+    promise.then( function (data) {
+      swal(
+        "Data Saved",
+        "Successfully Stored",
+        "success"
+      );
+      $('#remarks-modal').modal('hide');
+    })
+    .then(null, function () {  
+      swal(
+        "Failed to save",
+        "Try Again",
+        "error"        
+      );
+    });
+  };
+
+  $scope.data_remarks = function (key) {
+    $scope.remarks_form = $scope.patients[key];
+    console.log($scope.remarks_form);
+    remarks();
+  };
+
+  function remarks() {
+    var promise = ClinicFactory.fetch_remarks();
+
+    promise.then( function (data) {
+      $scope.remarks = data.data.result;
+    })
+    .then(null, function(data) {
+      
+    });
+  };
 
   $scope.add_patients = function () {
     var promise = ClinicFactory.add_patients($scope.patients_form);
@@ -68,7 +115,6 @@ clinicApp.controller('adminController', function ( $scope, ClinicFactory ) {
       "error"
     );
     $('#delete-modal').modal('hide');
-    patients();
   };
 
   $scope.update_patients = function (value) {
@@ -106,9 +152,19 @@ clinicApp.controller('adminController', function ( $scope, ClinicFactory ) {
     $('#update-modal').modal('hide');
   };
 
+  $scope.logout = function () {
+    var promise = ClinicFactory.logout();
+
+    promise.then( function () {
+      window.location.href = '#/login';
+    })
+    .then(null, function () {
+      window.location.href = '#/login';
+    });
+  }
+
   $scope.get_patients = function (value) {
     var promise = ClinicFactory.get_patients($scope.view_data);
-
   }
 
   $scope.data_view = function (key) {
@@ -122,7 +178,11 @@ clinicApp.controller('adminController', function ( $scope, ClinicFactory ) {
       $scope.patients = data.data.result;
     })
     .then(null, function(data) {
-      patients();
+      swal(
+        "No Data",
+        "No data to be shown",
+        "warning"
+      )
     });
   };
 });
