@@ -32,6 +32,18 @@
           <span class="menu-collapsed">Add Patients</span>
         </div>
       </a>
+      <a href="#/schedule" class="default-color text-white list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-list-ul fa-fw mr-3"></span>
+          <span class="menu-collapsed">View Schedule</span>
+        </div>
+      </a>
+      <a href="#/history" class="default-color text-white list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-history fa-fw mr-3"></span>
+          <span class="menu-collapsed">Patient History</span>
+        </div>
+      </a>
       <a ng-click="logout()" class="default-color text-white list-group-item list-group-item-action borderless">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-sign-out-alt fa-fw mr-3"></span>
@@ -47,7 +59,7 @@
           <h4 class="text-muted mb-4">Add Patients</h4>
           <div class="card">
             <div class="card-header default-color text-white">
-              Input Data
+              Personal Information
             </div>
             <div class="card-body">
               <form id="signup_form" autocomplete="off">
@@ -103,7 +115,7 @@
                         <input class="form-control" type="text" placeholder="Contact" ng-model="patients_form.econtact">
                       </div>
                       <div class="form-group col-md-4">
-                        <input class="form-control" type="text" placeholder="Relation" ng-model="patients_form.eralation">
+                        <input class="form-control" type="text" placeholder="Relation" ng-model="patients_form.erelation">
                       </div>
                     </div>
                   </div>

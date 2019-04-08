@@ -16,6 +16,11 @@
   box-sizing: border-box;
 }
 
+.left-border {
+  border-right: 3px solid lightblue; 
+  margin-right: 10px
+}
+
 #body-row {
   margin-left:0;
   margin-right:0;

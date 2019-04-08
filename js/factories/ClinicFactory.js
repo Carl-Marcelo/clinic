@@ -84,7 +84,7 @@ clinicApp.factory('ClinicFactory', function($http) {
 
   factory.add_remarks = function (data) {
     var promise = $http ({
-      url: '././function/patients/add_remarks.php',
+      url: '././function/remarks/add_remarks.php',
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       transformRequest: function(obj) {
@@ -100,7 +100,23 @@ clinicApp.factory('ClinicFactory', function($http) {
 
   factory.fetch_remarks = function (data) {
     var promise = $http ({
-      url: '././function/patients/fetch_remarks.php',
+      url: '././function/remarks/fetch_remarks.php',
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      transformRequest: function(obj) {
+        var str = [];
+        for(var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join('&');
+      },
+      data : data 
+    })
+    return promise;
+  };
+
+  factory.get_remarks = function (data) {
+    var promise = $http ({
+      url: '././function/remarks/get_remarks.php',
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       transformRequest: function(obj) {
@@ -117,6 +133,54 @@ clinicApp.factory('ClinicFactory', function($http) {
   factory.logout = function (data) {
     var promise = $http ({
       url: '././function/admin/logout.php',
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      transformRequest: function(obj) {
+        var str = [];
+        for(var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join('&');
+      },
+      data : data 
+    })
+    return promise;
+  };
+
+  factory.add_schedule = function (data) {
+    var promise = $http ({
+      url: '././function/schedule/add_schedule.php',
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      transformRequest: function(obj) {
+        var str = [];
+        for(var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join('&');
+      },
+      data : data 
+    })
+    return promise;
+  };
+
+  factory.fetch_schedule = function (data) {
+    var promise = $http ({
+      url: '././function/schedule/fetch_schedule.php',
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      transformRequest: function(obj) {
+        var str = [];
+        for(var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join('&');
+      },
+      data : data 
+    })
+    return promise;
+  };
+
+  factory.delete_schedule = function (data) {
+    var promise = $http ({
+      url: '././function/schedule/delete_schedule.php',
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       transformRequest: function(obj) {

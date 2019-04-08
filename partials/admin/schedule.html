@@ -1,0 +1,180 @@
+<div class="row" id="body-row">
+  <div id="sidebar-container" class="sidebar-expanded d-none d-md-block default-color col-2 z-depth-3">
+    <ul class="list-group sticky-top sticky-offset" id="sidebar-list">
+      <li class="default-color-dark text-white list-group-item d-flex borderless">
+        <h5 class="">RR Dental Clinic</h5>
+      </li>
+      <!-- <a href="#/admin-profile" aria-expanded="false" class="default-color text-white list-group-item list-group-item-action flex-column borderless mt-3 mb-3 ">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-user fa-fw mr-3"></span>
+          <span clas="menu-collapsed">Account</span>
+          <span class="submenu-icon ml-auto"></span>
+        </div>
+      </a> -->
+      <li class="list-group-item sidebar-separator-title text-white default-color-dark borderless d-flex align-items-center menu-collapsed">
+        <small>Options</small>
+      </li>
+      <!-- <a href="#/home" class="default-color text-white list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-home fa-fw mr-3"></span>
+          <span class="menu-collapsed">Home</span>
+        </div>
+      </a> -->
+      <a href="#/view" class="default-color text-white list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-list-ol fa-fw mr-3"></span>
+          <span class="menu-collapsed">View Patients</span>
+        </div>
+      </a>
+      <a href="#/add-patients" class="default-color text-white list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-plus fa-fw mr-3"></span>
+          <span class="menu-collapsed">Add Patients</span>
+        </div>
+      </a>
+      <a href="#/schedule" class="blue lighten-5 text-default list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-list-ul fa-fw mr-3"></span>
+          <span class="menu-collapsed">View Schedule</span>
+        </div>
+      </a>
+      <a href="#/history" class="default-color text-white list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-history fa-fw mr-3"></span>
+          <span class="menu-collapsed">Patient History</span>
+        </div>
+      </a>
+      <a ng-click="logout()" class="default-color text-white list-group-item list-group-item-action borderless">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-sign-out-alt fa-fw mr-3"></span>
+          <span class="menu-collapsed">Log Out</span>
+        </div>
+      </a>
+    </ul>
+  </div>
+
+  <div class="col p-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h4 class="text-muted mb-4">Scheduled Patients</h4>
+        <div class="card">
+          <div class="card-body">
+            <div class="mb-3">
+              <button class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#schedule-modal">
+                Set Schedule
+              </button>
+            </div>
+            <form class="form-inline col-md-6" id="search">
+              <i class="fas fa-search default-color text-white"></i>
+              <input class="form-control form-control-sm ml-3 w-75" type="text" id="searchBox" ng-model="searchBox" placeholder="Search" aria-label="Search">
+            </form>
+            <table class="table table-hover table-striped table-sm mt-3">
+              <thead class="default-color text-white">
+                <th>Date</th>
+                <th>Time</th>
+                <th>Name</th>
+                <th>Dentist</th>
+                <th>Action</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="(key, value) in schedule | filter: searchBox">
+                  <td>{{ value.set_date }}</td>
+                  <td>{{ value.set_time }}</td>
+                  <td>{{ value.name }}</td>
+                  <td>{{ value.dentist }}</td>
+                  <td>
+                    <a class="text-danger" data-toggle="modal" data-target="#delete-sched-modal" ng-click="data_sched_delete(key)">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delete-sched-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header default-color text-white">
+        <h5 class="modal-title w-100" id="myModalLabel">Delete Data</h5> 
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Delete this data?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" ng-click="delete_schedule(value)">Yes</button>
+        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Schedule Modal -->
+<div class="modal fade" id="schedule-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header default-color text-white">
+        <h5 class="modal-title w-100" id="myModalLabel">Set Schedule</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="signup_form">
+          <div class="row mt-3">
+            <div class="form-group col-md-12">
+              <input class="form-control" type="text" placeholder="Name" ng-model="schedule_form.name">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="form-group col-md-12">
+              <input class="form-control" type="text" id="date-sched-input" value="set_date" placeholder="Set Date" ng-model="schedule_form.set_date"> 
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="form-group col-md-12">
+              <input class="form-control" type="text"  value="set_time" placeholder="Set Time" ng-model="schedule_form.set_time">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="form-group col-md-12">
+              <select class="form-control" ng-model="schedule_form.dentist">
+                <option disabled="disabled" selected="selected" id="gender_select" value>Select Dentist</option>
+                <option value="Rolando Romero">Rolando Romero</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success btn-sm" ng-click="add_schedule()">Save</button>
+        <button class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {
+  $('#date-input').datepicker({
+    'format':'dd-mm-yyyy',
+    'autoclose': true
+  });
+
+  
+  $('#date-sched-input').datepicker({
+        'format':'mm-dd-yyyy',
+        'autoclose': true
+      });
+});
+</script>

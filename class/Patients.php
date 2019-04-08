@@ -19,7 +19,6 @@ class Patients extends ClassParent
     public $ename = null;
     public $econtact = null;
     public $erelation = null;
-    public $remarks = null;
 
     public function __construct(
                                 $pk,
@@ -35,8 +34,7 @@ class Patients extends ClassParent
                                 $address,
                                 $ename,
                                 $econtact,
-                                $erelation,
-                                $remarks
+                                $erelation
                             ) {
         $fields = get_defined_vars();
         if (empty($fields)) {
@@ -67,8 +65,7 @@ class Patients extends ClassParent
             address,
             ename,
             econtact,
-            erelation,
-            remarks
+            erelation
         ) VALUES (
             '$date',
             '$this->last_name',
@@ -82,8 +79,7 @@ class Patients extends ClassParent
             '$this->address',
             '$this->ename',
             '$this->econtact',
-            '$this->erelation',
-            '$this->remarks'
+            '$this->erelation'
         );
 EOT;
 
@@ -107,8 +103,7 @@ EOT;
             address,
             ename,
             econtact,
-            erelation,
-            remarks
+            erelation
         FROM patients;
 EOT;
 
@@ -144,8 +139,7 @@ EOT;
             address,
             ename,
             econtact,
-            erelation,
-            remarks
+            erelation
             )
         =
             (
@@ -161,37 +155,11 @@ EOT;
             '$this->address',
             '$this->ename',
             '$this->econtact',
-            '$this->erelation',
-            '$this->remarks'
+            '$this->erelation'
             )
         WHERE pk = $this->pk;
 EOT;
 
         return ClassParent::update($sql);
-    }
-
-    public function get_patients()
-    {
-        $sql = <<<EOT
-        SELECT
-            pk,
-            date_time,
-            last_name,
-            middle_name,
-            first_name,
-            age,
-            date_of_birth,
-            gender,
-            contact,
-            email,
-            address,
-            ename,
-            econtact,
-            erelation,
-            remarks      
-        FROM patients;
-EOT;
-
-        return ClassParent::get($sql);
     }
 }

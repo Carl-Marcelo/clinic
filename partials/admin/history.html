@@ -1,0 +1,152 @@
+<div class="row" id="body-row">
+    <div id="sidebar-container" class="sidebar-expanded d-none d-md-block default-color col-2 z-depth-3">
+      <ul class="list-group sticky-top sticky-offset" id="sidebar-list">
+        <li class="default-color-dark text-white list-group-item d-flex borderless">
+          <h5 class="">RR Dental Clinic</h5>
+        </li>
+        <!-- <a href="#/admin-profile" aria-expanded="false" class="default-color text-white list-group-item list-group-item-action flex-column borderless mt-3 mb-3 ">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-user fa-fw mr-3"></span>
+            <span clas="menu-collapsed">Account</span>
+            <span class="submenu-icon ml-auto"></span>
+          </div>
+        </a> -->
+        <li class="list-group-item sidebar-separator-title text-white default-color-dark borderless d-flex align-items-center menu-collapsed">
+          <small>Options</small>
+        </li>
+        <!-- <a href="#/home" class="default-color text-white list-group-item list-group-item-action borderless">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-home fa-fw mr-3"></span>
+            <span class="menu-collapsed">Home</span>
+          </div>
+        </a> -->
+        <a href="#/view" class="default-color text-white list-group-item list-group-item-action borderless">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-list-ol fa-fw mr-3"></span>
+            <span class="menu-collapsed">View Patients</span>
+          </div>
+        </a>
+        <a href="#/add-patients" class="default-color text-white list-group-item list-group-item-action borderless">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-plus fa-fw mr-3"></span>
+            <span class="menu-collapsed">Add Patients</span>
+          </div>
+        </a>
+        <a href="#/schedule" class="default-color text-white list-group-item list-group-item-action borderless">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-list-ul fa-fw mr-3"></span>
+            <span class="menu-collapsed">View Schedule</span>
+          </div>
+        </a>
+        <a href="#/history" class="blue lighten-5 text-default list-group-item list-group-item-action borderless">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-history fa-fw mr-3"></span>
+            <span class="menu-collapsed">Patient History</span>
+          </div>
+        </a>
+        <a ng-click="logout()" class="default-color text-white list-group-item list-group-item-action borderless">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-sign-out-alt fa-fw mr-3"></span>
+            <span class="menu-collapsed">Log Out</span>
+          </div>
+        </a>
+      </ul>
+    </div>
+  
+    <div class="col p-4">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h4 class="text-muted mb-4">Patients History</h4>
+          <div class="card">
+            <div class="card-body">
+              <div class="mb-3">
+                <button class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#remarks-modal">
+                  Add Remarks
+                </button> 
+              </div>
+              <form class="form-inline col-md-6" id="search">
+                <i class="fas fa-search default-color text-white"></i>
+                <input class="form-control form-control-sm ml-3 w-75" type="text" id="searchBox" ng-model="searchBox" placeholder="Search" aria-label="Search">
+              </form>
+              <table class="table table-hover table-striped table-sm mt-3">
+                <thead class="default-color text-white">
+                  <th>Date & Time</th>
+                  <th>Name</th>
+                  <th>Remarks</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="(key, value) in remarks | filter: searchBox">
+                    <td>{{ value.remarks_date }}</td>
+                    <td>{{ value.remarks_name }}</td>
+                    <td>{{ value.remarks_comment }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+   <!-- Remarks Modal -->
+   <div class="modal fade" id="remarks-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header default-color text-white">
+          <h5 class="modal-title w-100" id="myModalLabel">Add Remarks</h5> 
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row my-3">
+           <div class="col-md-12">
+              <form action="" id="signup_form">
+                <div class="form-group">
+                  <input class="form-control" type="text" id="remarks_name" placeholder="Name" ng-model="remarks_form.remarks_name"></i>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" rows="3" id="remarks_text" placeholder="Remarks" ng-model="remarks_form.remarks_comment"></textarea>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" ng-click="add_remarks()">Save</button>
+          <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="modal fade" id="delete-sched-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header default-color text-white">
+          <h5 class="modal-title w-100" id="myModalLabel">Delete Data</h5> 
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Delete this data?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-sm" ng-click="delete_schedule(value)">Yes</button>
+          <button type="button" class="btn btn-primary btn-sm" ng-click="delete_cancel()">No</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <script>
+  $(document).ready(function () {
+    $('#date-input').datepicker({
+      'format':'dd-mm-yyyy',
+      'autoclose': true
+    });
+  });
+  </script>
