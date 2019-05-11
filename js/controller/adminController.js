@@ -177,7 +177,6 @@ clinicApp.controller('adminController', function ( $scope, ClinicFactory ) {
 
     promise.then( function (data) {
       $scope.remarks = data.data.result;
-      console.log($scope.remarks);
     })
     .then(null, function(data) {
       
